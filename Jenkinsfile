@@ -1,31 +1,42 @@
 pipeline {
     agent any
 
-
     stages {
-        stage('java8') {
-            tools {
-                jdk "jdk-8"
-            }
+        stage('Parallel Buildings') {
+            parallel {
+                stage('java8') {
+                    tools {
+                        jdk "jdk-8"
+                    }
 
-            stages {
-                stage('compile') {
-                    steps {
-                        "java -version"
+                    agent {
+                        label "Java 8"
+                    }
+
+                    stages {
+                        stage('compile') {
+                            steps {
+                                sh "java -version"
+                            }
+                        }
                     }
                 }
-            }
-        }
 
-        stage('java16') {
-            tools {
-                jdk "jdk-16"
-            }
+                stage('java16') {
+                    tools {
+                        jdk "jdk-16"
+                    }
 
-            stages {
-                stage('compile') {
-                    steps {
-                        "java -version"
+                    agent {
+                        label "Java 16"
+                    }
+
+                    stages {
+                        stage('compile') {
+                            steps {
+                                sh "java -version"
+                            }
+                        }
                     }
                 }
             }
