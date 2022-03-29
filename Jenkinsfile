@@ -46,31 +46,6 @@ pipeline {
                         }
                     }
                 }
-
-                stage('java16') {
-                    tools {
-                        jdk "jdk-16"
-                    }
-
-                    stage('compile') {
-                        steps {
-                            echo '\n\n==================='
-                            sh 'mvn compile -Dmaven.test.skip'
-                        }
-                    }
-
-                    stage('test') {
-                        echo '\n\n==================='
-                        sh 'mvn test'
-                    }
-
-                    stage('package') {
-                        steps {
-                            echo '\n\n==================='
-                            sh 'mvn clean package -Dmaven.test.skip'
-                        }
-                    }
-                }
             }
         }
     }
