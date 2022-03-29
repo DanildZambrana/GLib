@@ -9,10 +9,6 @@ pipeline {
                         jdk "jdk-8"
                     }
 
-                    agent {
-                        label "Java 8"
-                    }
-
                     stages {
                         stage('compile') {
                             steps {
@@ -25,10 +21,6 @@ pipeline {
                 stage('java16') {
                     tools {
                         jdk "jdk-16"
-                    }
-
-                    agent {
-                        label "Java 16"
                     }
 
                     stages {
