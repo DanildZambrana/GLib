@@ -7,7 +7,11 @@
     <groupId>com.github.danildzambrana</groupId>
     <artifactId>glib</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <modules>
+        <module>Core</module>
+        <module>Spigot/1_8</module>
+    </modules>
+    <packaging>pom</packaging>
 
     <name>GLib</name>
 
@@ -16,15 +20,49 @@
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.spigot.version>1.0</project.spigot.version>
+
+        <plugins.maven-javadoc.version>3.3.0</plugins.maven-javadoc.version>
+        <plugins.maven-source.version>3.2.1</plugins.maven-source.version>
+        <plugins.maven-compiler.version>3.8.1</plugins.maven-compiler.version>
+        <plugins.maven-shade.version>3.2.4</plugins.maven-shade.version>
+
+        <depencencies.jetbrains-annotations>23.0.0</depencencies.jetbrains-annotations>
     </properties>
     <url>https://danildzambrana.tech/GLib</url>
 
     <build>
+        <defaultGoal>clean package</defaultGoal>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${plugins.maven-javadoc.version}</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>${plugins.maven-source.version}</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
+                <version>${plugins.maven-compiler.version}</version>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
@@ -33,7 +71,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>3.2.4</version>
+                <version>${plugins.maven-shade.version}</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -54,4 +92,13 @@
             </resource>
         </resources>
     </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>${depencencies.jetbrains-annotations}</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 </project>
