@@ -7,7 +7,7 @@ pipeline {
                 jdk "jdk-8"
             }
 
-            stage('core') {
+            steps {
                 sh 'cd Core'
                 sh 'mvn clean install'
             }
