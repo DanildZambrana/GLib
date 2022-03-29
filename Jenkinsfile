@@ -30,9 +30,11 @@ pipeline {
                         }
 
                         stage('test') {
-                            echo '\n\n==================='
-                            sh 'cd Spigot'
-                            sh 'mvn test'
+                            steps {
+                                echo '\n\n==================='
+                                sh 'cd Spigot'
+                                sh 'mvn test'
+                            }
                         }
 
                         stage('package') {
